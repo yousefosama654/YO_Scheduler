@@ -1,5 +1,12 @@
-# Prerequisites
+# CCS Prerequisites
 *.d
+Debug/*
+targetConfigs/*
+.launches/*
+.cproject
+.project
+.ccsproject
+.settings
 
 # Object files
 *.o
