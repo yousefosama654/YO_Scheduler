@@ -14,7 +14,6 @@ YO_Scheduler is a straightforward OS scheduler designed to manage tasks based on
 - [AUTOSAR Layered Architecture](#autosar-layered-architecture)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [License](#license)
 
 ## Introduction
 
