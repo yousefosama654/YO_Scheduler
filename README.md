@@ -2,7 +2,7 @@
 
 ## Overview
 
-YO_Scheduler is a straightforward OS scheduler designed to manage tasks based on time-triggered scheduling. It is specifically tailored for embedded systems and follows the classic platform AUTOSAR layered architecture. This README provides essential information about the project, its scheduling mechanism, and the tasks it manages, namely `Led_Task()` and `Button_Task()`.
+YO_Scheduler is a straightforward OS scheduler designed to manage tasks based on time-triggered scheduling. It is specifically tailored for embedded systems and follows the classic platform AUTOSAR layered architecture. This README provides essential information about the project, its scheduling mechanism, the tasks it manages (namely `Led_Task()` and `Button_Task()`), and the hardware platform it is designed for.
 
 ## Table of Contents
 
@@ -11,6 +11,7 @@ YO_Scheduler is a straightforward OS scheduler designed to manage tasks based on
 - [Tasks](#tasks)
   - [Led_Task()](#led_task)
   - [Button_Task()](#button_task)
+- [Hardware Platform](#hardware-platform)
 - [AUTOSAR Layered Architecture](#autosar-layered-architecture)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
@@ -34,6 +35,10 @@ YO_Scheduler relies on a simple time-triggered scheduling mechanism. The schedul
 
 `Button_Task()` is another task managed by YO_Scheduler. It is responsible for monitoring the state of a button. The button state is considered changed (pressed or released) when it remains stable for 60 ms, as per the project's requirements.
 
+## Hardware Platform
+
+YO_Scheduler is designed to run on the TM4C123GH6PM microcontroller, which is based on the Cortex-M4F core. The SysTick timer is used to handle the OS scheduling time, ensuring accurate and predictable task execution. Additionally, custom DIO (Digital Input/Output) and Port drivers have been implemented in accordance with AUTOSAR requirements to interact with the microcontroller's hardware peripherals.
+
 ## AUTOSAR Layered Architecture
 
 YO_Scheduler adheres to the AUTOSAR layered architecture, a widely adopted framework for developing embedded systems. This architecture separates the software into different layers, ensuring modularity and scalability. YO_Scheduler can be integrated into an AUTOSAR-compliant system with ease.
@@ -44,8 +49,30 @@ To get started with YO_Scheduler, follow these steps:
 
 1. Clone the YO_Scheduler repository to your development environment.
 2. Configure the scheduler parameters as needed (e.g., task intervals, hardware interface).
-3. Build the project using your preferred toolchain.
-4. Integrate YO_Scheduler into your AUTOSAR-based embedded system.
+3. Build the project using your preferred toolchain, ensuring compatibility with the TM4C123GH6PM microcontroller.
+4. Integrate YO_Scheduler into your AUTOSAR-based embedded system, taking advantage of the custom DIO and Port drivers.
 5. Initialize and start the scheduler within your application code.
 
+## Usage
 
+Here's a simple example of how to use YO_Scheduler within your application code:
+
+```c
+#include "YO_Scheduler.h"
+
+int main() {
+    // Initialize hardware and YO_Scheduler
+
+    // Configure and add tasks
+    YO_Scheduler_AddTask(Led_Task, 40);      // LED task every 40 ms
+    YO_Scheduler_AddTask(Button_Task, 20);   // Button task every 20 ms
+
+    // Start YO_Scheduler
+    YO_Scheduler_Start();
+
+    while (1) {
+        // Your application code here
+    }
+
+    return 0;
+}
