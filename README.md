@@ -1,5 +1,4 @@
-# YO_Scheduler
-
+<h1 class="center">YO_Scheduler</h1>
 ## Overview
 
 YO_Scheduler is a straightforward OS scheduler designed to manage tasks based on time-triggered scheduling. It is specifically tailored for embedded systems and follows the classic platform AUTOSAR layered architecture. This README provides essential information about the project, its scheduling mechanism, the tasks it manages (namely `Led_Task()` and `Button_Task()`), and the hardware platform it is designed for.
@@ -58,21 +57,13 @@ To get started with YO_Scheduler, follow these steps:
 Here's a simple example of how to use YO_Scheduler within your application code:
 
 ```c
-#include "YO_Scheduler.h"
+#include "Os.h"
 
-int main() {
-    // Initialize hardware and YO_Scheduler
-
-    // Configure and add tasks
-    YO_Scheduler_AddTask(Led_Task, 40);      // LED task every 40 ms
-    YO_Scheduler_AddTask(Button_Task, 20);   // Button task every 20 ms
-
-    // Start YO_Scheduler
-    YO_Scheduler_Start();
-
-    while (1) {
-        // Your application code here
-    }
-
+int main(void)
+{
+    /*
+     * Start the Os to Init the Peripherals and Start Scheduling
+     */
+    Os_Start();
     return 0;
 }
