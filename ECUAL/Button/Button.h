@@ -28,5 +28,4 @@
 /* checks the Button state every 20ms */
 uint8 Button_GetState(void);
 
-
 #endif /* ECUAL_BUTTON_BUTTON_H_ */

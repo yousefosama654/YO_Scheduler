@@ -12,8 +12,8 @@
 
 #include "Os.h"
 
-volatile uint8 ticks = 0;
-volatile boolean Os_Flag = FALSE;
+volatile static uint8 ticks = 0;
+volatile static boolean Os_Flag = FALSE;
 
 /* count the Os ticks based on Systick IRQ every 20 ms*/
 void Os_CountTicks(void)
@@ -44,38 +44,34 @@ void Os_Schedule(void)
     SysTick_Init(Os_TICK_BASE);
     while (1)
     {
-        while(Os_Flag==FALSE);
+        while (Os_Flag==FALSE);
+        Os_Flag = FALSE;
         switch (ticks)
         {
         case 100:
         case 20:
-            Button_GetState();
+            Button_Task();
             break;
         case 80:
         case 40:
+            Button_Task();
             Led_Task();
-            Button_GetState();
             break;
         case 60:
             Button_Task();
             break;
         case 120:
+            ticks = 0;
             Led_Task();
             Button_Task();
-            ticks = 0;
             break;
         }
-        Os_Flag = FALSE;
     }
 }
-/*
- * HINT
- * Debouncing Problem is not Considered in my Code as It is time triggered OS.
- * can't use any Delay Function in the system
- */
+
 void Button_Task(void)
 {
-    static uint8 PrevState = BUTTON_Released;
+    STATIC uint8 PrevState = BUTTON_Released;
     uint8 CurrState = Button_GetState();
     if (CurrState == BUTTON_Pressed && PrevState == BUTTON_Released)
     {
@@ -85,6 +81,10 @@ void Button_Task(void)
     else if (CurrState == BUTTON_Released && PrevState == BUTTON_Pressed)
     {
         PrevState = BUTTON_Released;
+    }
+    else
+    {
+        /* Do Nothing */
     }
 }
 void Led_Task(void)

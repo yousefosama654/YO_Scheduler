@@ -14,8 +14,8 @@
 #include "Dio.h"
 
 /* Positive Logic Led */
-#define LED_ON STD_ON
-#define LED_OFF STD_OFF
+#define LED_ON      STD_ON
+#define LED_OFF     STD_OFF
 
 #define LED_CHANNEL_ID_INDEX        (uint8)0x00
 
