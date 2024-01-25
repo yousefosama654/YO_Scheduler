@@ -1,4 +1,5 @@
 <h1 class="center">YO_Scheduler</h1>
+
 ## Overview
 
 YO_Scheduler is a straightforward OS scheduler designed to manage tasks based on time-triggered scheduling. It is specifically tailored for embedded systems and follows the classic platform AUTOSAR layered architecture. This README provides essential information about the project, its scheduling mechanism, the tasks it manages (namely `Led_Task()` and `Button_Task()`), and the hardware platform it is designed for.
